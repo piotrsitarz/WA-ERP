@@ -21,6 +21,7 @@ export type SaleOrder = {
     name: string;
     state?: string;
     date_order?: string;
+    partner_id?: OdooIdName;
 };
 
 export type SaleOrderLine = {
@@ -35,3 +36,12 @@ export type ProductAvailability = {
 };
 
 export type AvailabilityMap = Map<number, ProductAvailability>;
+
+export type StockPicking = {
+    id: number;
+    name?: string;
+    state?: string;
+    scheduled_date?: string;
+    date_done?: string;
+    origin?: string;
+};

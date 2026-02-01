@@ -1,11 +1,13 @@
 ﻿import { handlePartner } from "./partner.js";
 import { handleLastOrder } from "./lastorder.js";
 import { handleOffer } from "./offer.js";
+import { handleLastOrderStatus } from "./lastorderstatus.js";
 import type { CommandContext, ParsedCommand } from "../models/command.js";
 
 const handlers: Record<string, (ctx: CommandContext) => Promise<void>> = {
     partner: handlePartner,
-    lastorder: handleLastOrder,
+    lastOrder: handleLastOrder,
+    lastOrderStatus: handleLastOrderStatus,
     offer: handleOffer,
 };
 

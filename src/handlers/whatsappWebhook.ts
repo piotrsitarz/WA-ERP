@@ -115,7 +115,7 @@ export const createWhatsappWebhookHandler = ({
                         await whatsappClient.sendText({
                             phoneNumberId,
                             to: from,
-                            text: "Nie znam komendy. Użyj /partner, /lastorder, /offer",
+                            text: "Nie znam komendy. Użyj /partner, /last-order, /last-order-status, /offer",
                         });
                     }
                 }

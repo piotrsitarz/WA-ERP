@@ -11,8 +11,12 @@ export const parseCommand = (input: string | null | undefined): ParsedCommand | 
         return { name: "offer" };
     }
 
-    if (/^\/lastorder$/i.test(trimmed)) {
-        return { name: "lastorder" };
+    if (/^\/last-order$/i.test(trimmed)) {
+        return { name: "lastOrder" };
+    }
+
+    if (/^\/last-order-status$/i.test(trimmed)) {
+        return { name: "lastOrderStatus" };
     }
 
     const match = trimmed.match(/^\/([a-zA-Z]+)(?:_(\d+))?$/);
