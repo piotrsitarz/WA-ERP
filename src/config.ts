@@ -1,4 +1,4 @@
-﻿import "dotenv/config";
+import "dotenv/config";
 
 type Config = {
     PORT: number;
@@ -9,6 +9,7 @@ type Config = {
     ODOO_DB: string;
     ODOO_USER: string;
     ODOO_PASSWORD: string;
+    REDIS_URL?: string;
 };
 
 const PORT = Number(process.env.PORT || 3000);
@@ -21,6 +22,8 @@ const ODOO_DB = process.env.ODOO_DB;
 const ODOO_USER = process.env.ODOO_USER;
 const ODOO_PASSWORD = process.env.ODOO_PASSWORD;
 
+const REDIS_URL = process.env.REDIS_URL;
+
 // --- startup validation (fail fast) ---
 if (!VERIFY_TOKEN) throw new Error("Missing WHATSAPP_VERIFY_TOKEN in .env");
 if (!WHATSAPP_ACCESS_TOKEN) throw new Error("Missing WHATSAPP_ACCESS_TOKEN in .env");
@@ -28,6 +31,8 @@ if (!WHATSAPP_ACCESS_TOKEN) throw new Error("Missing WHATSAPP_ACCESS_TOKEN in .e
 if (!ODOO_BASE_URL || !ODOO_DB || !ODOO_USER || !ODOO_PASSWORD) {
     throw new Error("Missing Odoo env vars: ODOO_BASE_URL/ODOO_DB/ODOO_USER/ODOO_PASSWORD");
 }
+
+if (!REDIS_URL) throw new Error("Missing REDIS_URL in .env");
 
 export const config: Config = {
     PORT,
@@ -38,4 +43,5 @@ export const config: Config = {
     ODOO_DB: ODOO_DB!,
     ODOO_USER: ODOO_USER!,
     ODOO_PASSWORD: ODOO_PASSWORD!,
+    REDIS_URL,
 };

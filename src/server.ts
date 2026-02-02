@@ -1,4 +1,4 @@
-﻿import Fastify from "fastify";
+import Fastify from "fastify";
 
 import { config } from "./config.js";
 import { createDedupe } from "./utils/dedupe.js";
@@ -10,7 +10,7 @@ import type { WhatsappWebhookBody } from "./models/whatsapp.js";
 
 const app = Fastify({ logger: true });
 
-const dedupe = createDedupe();
+const dedupe = createDedupe({ logger: app.log });
 const whatsappClient = createWhatsappClient({ logger: app.log });
 
 const processWhatsappWebhook = createWhatsappWebhookHandler({
@@ -63,5 +63,20 @@ app.post("/webhooks/whatsapp", async (req, reply) => {
 // Healthcheck
 // ==============================
 app.get("/health", async () => ({ ok: true }));
+
+// ==============================
+// Test dedupe
+// ==============================
+app.get<{ Params: { id: string } }>("/test/dedupe/:id", async (req) => {
+    const id = req.params.id;
+    const first = await dedupe.isDuplicate(id);
+    const second = await dedupe.isDuplicate(id);
+
+    return {
+        firstCallDuplicate: first,
+        secondCallDuplicate: second,
+    };
+});
+
 
 app.listen({ port: config.PORT, host: "0.0.0.0" });

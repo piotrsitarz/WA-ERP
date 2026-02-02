@@ -1,4 +1,4 @@
-﻿import type { FastifyBaseLogger } from "fastify";
+import type { FastifyBaseLogger } from "fastify";
 import type { CommandContext, ParsedCommand } from "../models/command.js";
 import type { WhatsappWebhookBody } from "../models/whatsapp.js";
 import type { WhatsappClient } from "../services/whatsappClient.js";
@@ -96,7 +96,7 @@ export const createWhatsappWebhookHandler = ({
                         continue;
                     }
 
-                    if (dedupe.isDuplicate(messageId)) {
+                    if (await dedupe.isDuplicate(messageId)) {
                         logger.info({ messageId, from }, "Duplicate message (deduped)");
                         continue;
                     }

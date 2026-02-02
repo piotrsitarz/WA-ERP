@@ -44,7 +44,7 @@ export const formatOrderStatusMessage = ({ order, picking }: OrderStatusMessageA
 
     const orderName = order.name || "Unknown";
     const orderDate = order.date_order || "Unknown";
-    const orderLine = `Zamówienie: ${orderName}\nDate: ${orderDate}`;
+    const orderLine = `Zamówienie: ${orderName}\nData: ${orderDate}`;
 
     if (!picking) {
         const orderStatus = order.state || "Unknown (no order state)";
